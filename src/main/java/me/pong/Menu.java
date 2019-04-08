@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 	public static final int WIDTH = 800, HEIGHT = WIDTH / 16 * 9;
-	JFrame frame;
+	static JFrame frame;
 	int widthS, widthE;
 	Font font;
 	Color startB = Color.white, exitB = Color.white;
@@ -18,9 +18,8 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 	}
 
 	void createMenu () {
-		frame = new JFrame ();
+		frame = new JFrame ("PONG");
 		frame.setSize (WIDTH, HEIGHT);
-		frame.getContentPane ().add (new PongGameMain ().gamePanel);
 		frame.addWindowListener (new WindowAdapter () {
 			@Override
 			public void windowClosing (WindowEvent e) {
@@ -82,7 +81,13 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 
 	public void mouseClicked (MouseEvent e) {
 		if (mouseOver (e.getX (), e.getY (), 315, 140, 170, 90)) {
+			this.removeMouseMotionListener (this);
+			this.removeMouseListener (this);
+			frame.invalidate ();
 			new PongGameMain ();
+			frame.getContentPane ().add(PongGameMain.gamePanel);
+			PongGameMain.game.start ();
+			frame.validate ();
 			System.out.println ("Click");
 		}
 
