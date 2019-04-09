@@ -4,8 +4,8 @@ public class Ball {
 	private int xpos, ypos;
 	int velocityX = 5, velocityY = -5;
 
-	void Ball () {
-		setPosition (400, 225);
+	public Ball () {
+		setPosition (250, 100);
 	}
 
 	void move () {

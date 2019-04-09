@@ -1,12 +1,14 @@
 package me.pong;
 
 public class Paddles {
-	final int p1x = 15, p2x = 440;
+	final int p1x = 15, p2x = 760;
 	int p1y = 0, p2y = 0;
 	int score1, score2;
 
 	public Paddles(){
+		setPosP1 (200);
 		setScore1 (0);
+		setPosP2 (200);
 		setScore2 (0);
 	}
 
@@ -14,8 +16,8 @@ public class Paddles {
 	void setPosP1 (int y) {
 		p1y = y;
 
-		if (p1y > 800) {
-			setPosP1 (800);
+		if (p1y > 340) {
+			setPosP1 (340);
 		}
 		else if (p1y < 0) {
 			setPosP1 (0);
@@ -25,8 +27,8 @@ public class Paddles {
 	void setPosP2 (int y) {
 		p2y = y;
 
-		if (p2y > 800) {
-			setPosP2 (800);
+		if (p2y > 340) {
+			setPosP2 (340);
 		}
 		else if (p2y < 0) {
 			setPosP2 (0);

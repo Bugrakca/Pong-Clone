@@ -84,8 +84,7 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 			this.removeMouseMotionListener (this);
 			this.removeMouseListener (this);
 			frame.invalidate ();
-			new PongGameMain ();
-			frame.getContentPane ().add(PongGameMain.gamePanel);
+			frame.add (PongGameMain.game);
 			PongGameMain.game.start ();
 			frame.validate ();
 			System.out.println ("Click");
