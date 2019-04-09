@@ -64,11 +64,11 @@ public class PongGameMain extends JPanel implements MouseMotionListener, ActionL
 		}
 		if ((ball.getXpos () <= 0)) {
 			paddles.setScore2 ((paddles.getScore2 () + 1));
-			ball.resetPositionandVelocity ();
+			ball.resetPositionAndVelocity ();
 		}
 		if ((ball.getXpos () >= 800)) {
 			paddles.setScore1 ((paddles.getScore1 () + 1));
-			ball.resetPositionandVelocity ();
+			ball.resetPositionAndVelocity ();
 		}
 
 	}

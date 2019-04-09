@@ -12,14 +12,14 @@ public class Ball {
 		setPosition (getXpos () + velocityX, getYpos () + velocityY);
 	}
 
-	void resetPositionandVelocity () {
+	void resetPositionAndVelocity () {
 		setPosition (400, 225);
 		velocityX = 5;
 		velocityY = -5;
 	}
 
 
-	void setPosition (double x, double y) {
+	private void setPosition (double x, double y) {
 		xpos = x;
 		ypos = y;
 	}

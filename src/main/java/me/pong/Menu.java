@@ -10,7 +10,7 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener {
 	static JFrame frame;
 	int widthS, widthE;
 	Font font;
-	Color startB = Color.white, exitB = Color.white;
+	private Color startB = Color.white, exitB = Color.white;
 
 
 	Menu () {

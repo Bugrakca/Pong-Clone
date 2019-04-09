@@ -2,8 +2,8 @@ package me.pong;
 
 public class Paddles {
 	final int p1x = 15, p2x = 760;
-	int p1y = 0, p2y = 0;
-	int score1, score2;
+	private int p1y = 0, p2y = 0;
+	private int score1, score2;
 
 	Paddles () {
 		setPosP1 (200);
