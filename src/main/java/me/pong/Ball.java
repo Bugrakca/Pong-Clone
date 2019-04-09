@@ -1,10 +1,10 @@
 package me.pong;
 
 public class Ball {
-	private int xpos, ypos;
-	int velocityX = 5, velocityY = -5;
+	double xpos, ypos;
+	double velocityX = 5, velocityY = -5;
 
-	public Ball () {
+	Ball () {
 		setPosition (250, 100);
 	}
 
@@ -12,21 +12,23 @@ public class Ball {
 		setPosition (getXpos () + velocityX, getYpos () + velocityY);
 	}
 
-	void resetPosition () {
+	void resetPositionandVelocity () {
 		setPosition (400, 225);
+		velocityX = 5;
+		velocityY = -5;
 	}
 
 
-	void setPosition (int x, int y) {
+	void setPosition (double x, double y) {
 		xpos = x;
 		ypos = y;
 	}
 
-	int getXpos () {
+	double getXpos () {
 		return xpos;
 	}
 
-	int getYpos () {
+	double getYpos () {
 		return ypos;
 	}
 }

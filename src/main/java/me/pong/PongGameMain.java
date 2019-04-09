@@ -9,58 +9,71 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 public class PongGameMain extends JPanel implements MouseMotionListener, ActionListener {
-	static final PongGameMain game = new PongGameMain ();
-	Timer time;
-	long currentTime;
-	Ball ball;
-	Paddles paddles;
-	BufferedImage offImage;
+	private Timer time;
+	private long currentTime;
+	private Ball ball;
+	private Paddles paddles;
+	private BufferedImage offImage;
 
-	public PongGameMain(){
+	PongGameMain () {
 		addMouseMotionListener (this);
 	}
 
 	public static void main (String[] args) {
 		Menu menu = new Menu ();
 		menu.createMenu ();
-		game.initialize ();
+		Menu.game.initialize ();
 	}
 
-	public void initialize () {
+	private void initialize () {
 		ball = new Ball ();
 		paddles = new Paddles ();
 		offImage = new BufferedImage (Menu.WIDTH, Menu.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		offImage.createGraphics ();
 	}
 
-	public void start () {
+	void start () {
 		currentTime = System.currentTimeMillis ();
 		time = new Timer (15, this);
 		time.start ();
 	}
 
-	public void checkCollision () {
+	private void checkCollision () {
 		if (ball.getYpos () == 0 || ball.getYpos () > 400) {//Size 450
-			ball.velocityY = (ball.velocityY * -1);
+			ball.velocityY = (ball.velocityY * -1.03);
+		}
+		if (ball.getYpos () <= 0) {
+			ball.ypos = 0;
+			ball.velocityY = -ball.velocityY;
 		}
 		if ((ball.getXpos () == 20) && hitPaddle ()) {
-			ball.velocityX = (ball.velocityX * -1);
+			ball.velocityX = (ball.velocityX * -1.03);
+			ball.xpos = paddles.p1x + 10;
 		}
-		if ((ball.getXpos () == 750 && hitPaddle ())) {
-			ball.velocityX = (ball.velocityX * -1);
+		if (ball.getXpos () < 20 && hitPaddle ()) {
+			ball.xpos = 20;
+			ball.velocityX = -ball.velocityX;
 		}
-		if ((ball.getXpos () == 0)) {
+		if ((ball.getXpos () == 755) && hitPaddle ()) {
+			ball.xpos = paddles.p2x;
+			ball.velocityX = (ball.velocityX * -1.03);
+		}
+		if (ball.getXpos () > 760 && hitPaddle ()) {
+			ball.xpos = 755;
+			ball.velocityX = -ball.velocityX;
+		}
+		if ((ball.getXpos () <= 0)) {
 			paddles.setScore2 ((paddles.getScore2 () + 1));
-			ball.resetPosition ();
+			ball.resetPositionandVelocity ();
 		}
-		if ((ball.getXpos () == 800)) {
+		if ((ball.getXpos () >= 800)) {
 			paddles.setScore1 ((paddles.getScore1 () + 1));
-			ball.resetPosition ();
+			ball.resetPositionandVelocity ();
 		}
 
 	}
 
-	public boolean hitPaddle () {
+	private boolean hitPaddle () {
 		boolean didHit = false;
 		if ((paddles.getPosP1 () - 10) <= ball.getYpos () && (paddles.getPosP1 () + 70) > ball.getYpos ()) {
 			didHit = true;
@@ -68,6 +81,7 @@ public class PongGameMain extends JPanel implements MouseMotionListener, ActionL
 		if ((paddles.getPosP2 () - 10) >= ball.getYpos () && (paddles.getPosP2 () + 70) < ball.getYpos ()) {
 			didHit = true;
 		}
+
 		return didHit;
 	}
 
@@ -89,7 +103,7 @@ public class PongGameMain extends JPanel implements MouseMotionListener, ActionL
 		g.drawString ("PONG", (Menu.WIDTH - fontMet) / 2 - 40, 30);
 		//Draw Ball
 		g.setColor (Color.white);
-		g.fillOval (ball.getXpos (), ball.getYpos (), 10, 10);
+		g.fillOval ((int) ball.getXpos (), (int) ball.getYpos (), 10, 10);
 		//Wins
 		Font fontWin = new Font ("Monospaced", Font.BOLD, 20);
 		g.setFont (fontWin);
@@ -124,9 +138,4 @@ public class PongGameMain extends JPanel implements MouseMotionListener, ActionL
 		checkCollision ();
 		repaint ();
 	}
-
-//	@Override
-//	public void update (Graphics g) {
-//		paint (g);
-//	}
 }

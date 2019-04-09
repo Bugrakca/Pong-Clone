@@ -5,7 +5,7 @@ public class Paddles {
 	int p1y = 0, p2y = 0;
 	int score1, score2;
 
-	public Paddles(){
+	Paddles () {
 		setPosP1 (200);
 		setScore1 (0);
 		setPosP2 (200);
@@ -23,7 +23,8 @@ public class Paddles {
 			setPosP1 (0);
 		}
 	}
-//Start Pos
+
+	//Start Pos
 	void setPosP2 (int y) {
 		p2y = y;
 
@@ -35,19 +36,19 @@ public class Paddles {
 		}
 	}
 
-	public void setScore1 (int score1){
+	void setScore1 (int score1) {
 		this.score1 = score1;
 	}
 
-	public int getScore1(){
+	int getScore1 () {
 		return score1;
 	}
 
-	public void setScore2 (int score2){
+	void setScore2 (int score2) {
 		this.score2 = score2;
 	}
 
-	public int getScore2(){
+	int getScore2 () {
 		return score2;
 	}
 

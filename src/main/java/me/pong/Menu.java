@@ -4,15 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Menu extends JPanel implements MouseMotionListener, MouseListener{
-	public static final int WIDTH = 800, HEIGHT = WIDTH / 16 * 9;
+public class Menu extends JPanel implements MouseMotionListener, MouseListener {
+	static final int WIDTH = 800, HEIGHT = WIDTH / 16 * 9;
+	static final PongGameMain game = new PongGameMain ();
 	static JFrame frame;
 	int widthS, widthE;
 	Font font;
 	Color startB = Color.white, exitB = Color.white;
 
 
-	public Menu () {
+	Menu () {
 		this.addMouseMotionListener (this);
 		this.addMouseListener (this);
 	}
@@ -44,7 +45,7 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 		else return false;
 	}
 
-	public void menuDraw (Graphics g) {
+	private void menuDraw (Graphics g) {
 		//Draw Title
 		Font newFont = new Font ("Monospaced", Font.BOLD, 60);
 		FontMetrics metrics = g.getFontMetrics (newFont);
@@ -84,10 +85,9 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 			this.removeMouseMotionListener (this);
 			this.removeMouseListener (this);
 			frame.invalidate ();
-			frame.add (PongGameMain.game);
-			PongGameMain.game.start ();
+			frame.add (game);
+			game.start ();
 			frame.validate ();
-			System.out.println ("Click");
 		}
 
 		if (mouseOver (e.getX (), e.getY (), 315, 240, 170, 90)) {
@@ -120,7 +120,6 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 		if (mouseOver (e.getX (), e.getY (), 315, 140, 170, 90)) {
 			startB = Color.green;
 			repaint (320, 145, 170, 90);
-			System.out.println ("Start");
 		}
 		else {
 			startB = Color.white;
@@ -130,7 +129,6 @@ public class Menu extends JPanel implements MouseMotionListener, MouseListener{
 		if (mouseOver (e.getX (), e.getY (), 315, 240, 170, 90)) {
 			exitB = Color.red;
 			repaint (320, 245, 170, 90);
-			System.out.println ("Exit");
 		}
 		else {
 			exitB = Color.white;
