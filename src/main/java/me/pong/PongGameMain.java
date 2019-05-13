@@ -39,27 +39,27 @@ public class PongGameMain extends JPanel implements MouseMotionListener, ActionL
 	}
 
 	private void checkCollision () {
-		if (ball.getYpos () == 0 || ball.getYpos () > 400) {//Size 450
+		if (ball.getYpos () == 0 || ball.getYpos () > 400) {//Edge collision
 			ball.velocityY = (ball.velocityY * -1.03);
 		}
-		if (ball.getYpos () <= 0) {
+		if (ball.getYpos () < 0) {
 			ball.ypos = 0;
 			ball.velocityY = -ball.velocityY;
 		}
-		if ((ball.getXpos () == 20) && hitPaddle ()) {
+		if ((ball.getXpos () == 20) && hitPaddle1 ()) {
 			ball.velocityX = (ball.velocityX * -1.03);
 			ball.xpos = paddles.p1x + 10;
 		}
-		if (ball.getXpos () < 20 && hitPaddle ()) {
+		if (ball.getXpos () < 20 && hitPaddle1 ()) {
 			ball.xpos = 20;
 			ball.velocityX = -ball.velocityX;
 		}
-		if ((ball.getXpos () == 755) && hitPaddle ()) {
-			ball.xpos = paddles.p2x;
+		if ((ball.getXpos () == 750) && hitPaddle2 ()) {
 			ball.velocityX = (ball.velocityX * -1.03);
+			ball.xpos = 750;
 		}
-		if (ball.getXpos () > 760 && hitPaddle ()) {
-			ball.xpos = 755;
+		if (ball.getXpos () >= 750 && hitPaddle2 ()) {
+			ball.xpos = 750;
 			ball.velocityX = -ball.velocityX;
 		}
 		if ((ball.getXpos () <= 0)) {
@@ -73,15 +73,25 @@ public class PongGameMain extends JPanel implements MouseMotionListener, ActionL
 
 	}
 
-	private boolean hitPaddle () {
+	private boolean hitPaddle1 () {
 		boolean didHit = false;
 		if ((paddles.getPosP1 () - 10) <= ball.getYpos () && (paddles.getPosP1 () + 70) > ball.getYpos ()) {
 			didHit = true;
 		}
-		if ((paddles.getPosP2 () - 10) >= ball.getYpos () && (paddles.getPosP2 () + 70) < ball.getYpos ()) {
+		if (ball.xpos < 15){
+			didHit = false;
+		}
+		return didHit;
+	}
+
+	private boolean hitPaddle2 () {
+		boolean didHit = false;
+		if ((paddles.getPosP2 () - 10) < ball.getYpos () && (paddles.getPosP2 () + 70) > ball.getYpos ()) {
 			didHit = true;
 		}
-
+		if (ball.getXpos () > 760){
+			didHit = false;
+		}
 		return didHit;
 	}
 
